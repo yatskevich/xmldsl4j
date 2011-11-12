@@ -1,0 +1,23 @@
+== Simple XML DSL for Java
+
+xmldsl4j is a very simple and easy to use Java library for programmatic XML generation.
+
+== Examples
+
+    import static com.yatskevich.xmldsl.Tag.tag;
+
+    public class Example {
+
+        public static void main(String[] args) {
+            Tag tag = tag("xml", "dsl").attr("title", "demo").nest(
+                        tag("nested"));
+
+            String xml = tag.render();
+
+            System.out.println(xml); // <xml:dsl title="demo"><nested/></xml:dsl>
+        }
+
+    }
+
+You can find all possible use cases in {TagTest.java}[link:/yatskevich/xmldsl4j/blob/master/src/test/java/com/yatskevich/xmldsl/TagTest.java]
+
