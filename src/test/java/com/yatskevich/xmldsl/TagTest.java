@@ -28,10 +28,18 @@ public class TagTest {
     }
 
     @Test
+    public void tagWithAttributeAsObject() {
+        Tag tag = tag("t").attr(new Attribute("attr", "val"));
+
+        assertTrue(tag.render().equals("<t attr=\"val\"/>"));
+    }
+
+    @Test
     public void nestedTags() {
-        Tag tag = tag("a").nest(
-                tag("b").nest(
-                        tag("c")));
+        Tag tag =
+                tag("a").nest(
+                        tag("b").nest(
+                                tag("c")));
         assertTrue(tag.render().equals("<a><b><c/></b></a>"));
     }
 

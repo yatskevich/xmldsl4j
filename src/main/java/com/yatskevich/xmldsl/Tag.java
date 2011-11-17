@@ -38,6 +38,10 @@ public class Tag extends Element {
         return add(new Attribute(prefix, name, value));
     }
 
+    public Tag attr(Attribute attribute) {
+        return add(attribute);
+    }
+
     private Tag add(Attribute attribute) {
         attributes.add(attribute);
         return this;
@@ -73,18 +77,4 @@ public class Tag extends Element {
         return join(renderedAttributes, " ");
     }
 
-    private static class Attribute extends Element {
-
-        private String value;
-
-        private Attribute(String prefix, String name, String value) {
-            super(prefix, name);
-            this.value = value;
-        }
-
-        public String render() {
-            String qName = getQName();
-            return qName + "=\"" + value + "\"";
-        }
-    }
 }
