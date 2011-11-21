@@ -12,6 +12,7 @@ public class Tag extends Element {
 
     private List<Tag> children = new ArrayList<Tag>();
     private List<Attribute> attributes = new ArrayList<Attribute>();
+    private String text;
 
     private Tag(String prefix, String name) {
         super(prefix, name);
@@ -57,10 +58,13 @@ public class Tag extends Element {
             builder.append(" ").append(renderAttributes());
         }
 
-        if (children.isEmpty()) {
+        if (children.isEmpty() && text == null) {
             builder.append("/>");
         } else {
             builder.append(">");
+            if (text != null) {
+                builder.append(text);
+            }
             for (Tag child : children) {
                 builder.append(child.render());
             }
@@ -77,4 +81,8 @@ public class Tag extends Element {
         return join(renderedAttributes, " ");
     }
 
+    public Tag text(String text) {
+        this.text = text;
+        return this;
+    }
 }

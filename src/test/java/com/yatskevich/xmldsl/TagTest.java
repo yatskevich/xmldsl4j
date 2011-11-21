@@ -43,5 +43,17 @@ public class TagTest {
         assertTrue(tag.render().equals("<a><b><c/></b></a>"));
     }
 
+    @Test
+    public void justTextInTag() {
+        Tag tag = tag("a").text("test");
+        assertTrue(tag.render().equals("<a>test</a>"));
+    }
+
+    @Test
+    public void textWithChildTag() {
+        Tag tag = tag("a").text("test").nest(tag("b"));
+        assertTrue(tag.render().equals("<a>test<b/></a>"));
+    }
+
 
 }
