@@ -1,6 +1,7 @@
 package com.yatskevich.xmldsl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.apache.commons.lang.StringUtils.join;
@@ -43,8 +44,18 @@ public class Tag extends Element {
         return add(attribute);
     }
 
+    public Tag nest(Tag... tags) {
+        children.addAll(Arrays.asList(tags));
+        return this;
+    }
+
     private Tag add(Attribute attribute) {
         attributes.add(attribute);
+        return this;
+    }
+
+    public Tag text(String text) {
+        this.text = text;
         return this;
     }
 
@@ -81,8 +92,4 @@ public class Tag extends Element {
         return join(renderedAttributes, " ");
     }
 
-    public Tag text(String text) {
-        this.text = text;
-        return this;
-    }
 }

@@ -44,6 +44,12 @@ public class TagTest {
     }
 
     @Test
+    public void nestSeveralTagsOnOneLevel() {
+        Tag tag = tag("a").nest(tag("b"), tag("c"));
+        assertTrue(tag.render().equals("<a><b/><c/></a>"));
+    }
+
+    @Test
     public void justTextInTag() {
         Tag tag = tag("a").text("test");
         assertTrue(tag.render().equals("<a>test</a>"));
