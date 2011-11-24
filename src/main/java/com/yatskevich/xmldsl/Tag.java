@@ -2,6 +2,7 @@ package com.yatskevich.xmldsl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.apache.commons.lang.StringUtils.join;
@@ -50,6 +51,13 @@ public class Tag extends Element {
     }
 
     private Tag add(Attribute attribute) {
+        Iterator<Attribute> iterator = attributes.iterator();
+        while (iterator.hasNext()) {
+            Attribute existingAttribute = iterator.next();
+            if (existingAttribute.getQName().equals(attribute.getQName())) {
+                iterator.remove();
+            }
+        }
         attributes.add(attribute);
         return this;
     }

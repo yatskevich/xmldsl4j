@@ -63,4 +63,20 @@ public class TagTest {
         assertThat(tag.render(), is("<a>test<b/></a>"));
     }
 
+    @Test
+    public void identicalAttributesAreAddedOnce() {
+        Tag tag = tag("t").attr("a", "val").attr("a", "val");
+        assertThat(tag.render(), is("<t a=\"val\"/>"));
+    }
+
+    @Test
+    public void inAttributeQNameClashLastEntryWins() {
+        Tag tag = tag("t").attr("a", "val_first").attr("a", "val_last");
+        assertThat(tag.render(), is("<t a=\"val_last\"/>"));
+
+        tag = tag("t").attr("p", "a", "val_first").attr("p", "a", "val_last");
+        assertThat(tag.render(), is("<t p:a=\"val_last\"/>"));
+
+    }
+
 }
