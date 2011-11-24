@@ -7,11 +7,14 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
  */
 public abstract class Element {
 
-    private String prefix;
-    private String name;
+    protected String prefix;
+    protected String name;
 
     protected Element(String prefix, String name) {
         this.prefix = prefix;
+        if (name == null || name.trim().equals("")) {
+            throw new IllegalArgumentException("Name should be filled");
+        }
         this.name = name;
     }
 
