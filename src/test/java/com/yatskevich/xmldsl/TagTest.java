@@ -3,6 +3,8 @@ package com.yatskevich.xmldsl;
 import org.junit.Test;
 
 import static com.yatskevich.xmldsl.Tag.tag;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -24,14 +26,14 @@ public class TagTest {
     public void simpleTagWithPrefixAndAttributes() {
         Tag tag = tag("y", "t").attr("attr", "val").attr("y", "a", "v");
 
-        assertTrue(tag.render().equals("<y:t attr=\"val\" y:a=\"v\"/>"));
+        assertThat(tag.render(), is("<y:t attr=\"val\" y:a=\"v\"/>"));
     }
 
     @Test
     public void tagWithAttributeAsObject() {
         Tag tag = tag("t").attr(new Attribute("attr", "val"));
 
-        assertTrue(tag.render().equals("<t attr=\"val\"/>"));
+        assertThat(tag.render(), is("<t attr=\"val\"/>"));
     }
 
     @Test
@@ -40,26 +42,25 @@ public class TagTest {
                 tag("a").nest(
                         tag("b").nest(
                                 tag("c")));
-        assertTrue(tag.render().equals("<a><b><c/></b></a>"));
+        assertThat(tag.render(), is("<a><b><c/></b></a>"));
     }
 
     @Test
     public void nestSeveralTagsOnOneLevel() {
         Tag tag = tag("a").nest(tag("b"), tag("c"));
-        assertTrue(tag.render().equals("<a><b/><c/></a>"));
+        assertThat(tag.render(), is("<a><b/><c/></a>"));
     }
 
     @Test
     public void justTextInTag() {
         Tag tag = tag("a").text("test");
-        assertTrue(tag.render().equals("<a>test</a>"));
+        assertThat(tag.render(), is("<a>test</a>"));
     }
 
     @Test
     public void textWithChildTag() {
         Tag tag = tag("a").text("test").nest(tag("b"));
-        assertTrue(tag.render().equals("<a>test<b/></a>"));
+        assertThat(tag.render(), is("<a>test<b/></a>"));
     }
-
 
 }
