@@ -2,6 +2,31 @@
 
 xmldsl4j is a very simple and easy to use Java library for programmatic XML generation.
 
+== How to use it in my project?
+
+If you use Maven add the following to your pom.xml:
+
+    ...
+    <repositories>
+        ...
+        <repository>
+            <id>exadel-releases</id>
+            <url>http://nexus.exadel.com/content/repositories/releases</url>
+        </repository>
+        ...
+    </repositories>
+    ...
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>com.yatskevich</groupId>
+            <artifactId>xmldsl4j</artifactId>
+            <version>0.3</version>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+
 == Examples
 
     import static com.yatskevich.xmldsl.Tag.tag;
