@@ -5,7 +5,7 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 /**
  * @author Ivan Yatskevich
  */
-public abstract class Element {
+public abstract class Element implements Renderable {
 
     protected String prefix;
     protected String name;

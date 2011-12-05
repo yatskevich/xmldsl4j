@@ -12,9 +12,8 @@ import static org.apache.commons.lang.StringUtils.join;
  */
 public class Tag extends Element {
 
-    private List<Tag> children = new ArrayList<Tag>();
+    private List<Renderable> children = new ArrayList<Renderable>();
     private List<Attribute> attributes = new ArrayList<Attribute>();
-    private String text;
 
     private Tag(String prefix, String name) {
         super(prefix, name);
@@ -63,7 +62,7 @@ public class Tag extends Element {
     }
 
     public Tag text(String text) {
-        this.text = text;
+        children.add(new TextNode(text));
         return this;
     }
 
@@ -77,14 +76,11 @@ public class Tag extends Element {
             builder.append(" ").append(renderAttributes());
         }
 
-        if (children.isEmpty() && text == null) {
+        if (children.isEmpty()) {
             builder.append("/>");
         } else {
             builder.append(">");
-            if (text != null) {
-                builder.append(text);
-            }
-            for (Tag child : children) {
+            for (Renderable child : children) {
                 builder.append(child.render());
             }
             builder.append("</").append(qName).append(">");

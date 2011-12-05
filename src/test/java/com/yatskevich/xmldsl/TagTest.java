@@ -64,6 +64,12 @@ public class TagTest {
     }
 
     @Test
+    public void textAlternatesWithTags() {
+        Tag tag = tag("a").text("b").text("c").nest(tag("d")).text("e");
+        assertThat(tag.render(), is("<a>bc<d/>e</a>"));
+    }
+
+    @Test
     public void identicalAttributesAreAddedOnce() {
         Tag tag = tag("t").attr("a", "val").attr("a", "val");
         assertThat(tag.render(), is("<t a=\"val\"/>"));
@@ -76,7 +82,6 @@ public class TagTest {
 
         tag = tag("t").attr("p", "a", "val_first").attr("p", "a", "val_last");
         assertThat(tag.render(), is("<t p:a=\"val_last\"/>"));
-
     }
 
 }
